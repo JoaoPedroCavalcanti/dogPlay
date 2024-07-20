@@ -2,6 +2,8 @@ from django.shortcuts import render
 
 
 
-def appointmentForm(req):
-    return render(req, 'appointment/pages/appointmentForm.html')
+def appointmentHome(req):
+    return render(req, 'appointment/pages/appointmentHome.html')
 
+def appointmentConfirmation(req):
+    return render(req, 'appointment/pages/appointmentConfirmation.html')

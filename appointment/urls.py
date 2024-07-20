@@ -1,6 +1,8 @@
 from django.urls import path
-from appointment.views import appointmentForm
+from appointment import views
+
 
 urlpatterns = [
-    path('', appointmentForm)
+    path('', views.appointmentHome),
+    path('123/', views.appointmentConfirmation),
 ]

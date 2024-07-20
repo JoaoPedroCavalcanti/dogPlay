@@ -1,0 +1,41 @@
+<main class="main-content">
+    <section class="list-section">
+        <h2>Eventos</h2>
+        <div class="event-list">
+            <div class="event-item">
+                <p>Data: 20/07/2024</p>
+                <p>Horário: 14:00</p>
+            </div>
+            <div class="event-item">
+                <p>Data: 21/07/2024</p>
+                <p>Horário: 15:00</p>
+            </div>
+            <!-- Adicione mais itens aqui -->
+        </div>
+    </section>
+
+    <section class="calendar-section">
+        <h2>Calendário</h2>
+        <div class="calendar-header">
+            <button class="prev-month" onclick="changeMonth(-1)">Anterior</button>
+            <span class="month-year" id="month-year"></span>
+            <button class="next-month" onclick="changeMonth(1)">Próximo</button>
+        </div>
+        <table class="calendar" id="calendar">
+            <thead>
+                <tr>
+                    <th>Dom</th>
+                    <th>Seg</th>
+                    <th>Ter</th>
+                    <th>Qua</th>
+                    <th>Qui</th>
+                    <th>Sex</th>
+                    <th>Sáb</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- The calendar will be made by JS -->
+            </tbody>
+        </table>
+    </section>
+</main>
