@@ -1,9 +1,6 @@
-{% include "appointment/partials/confirmationHead.html" %}
-<body>
-    <div class="container">
-        {% include "appointment/partials/navbar.html" %}
-        {% include "appointment/partials/confirmationSection.html" %}
-        {% include "appointment/partials/footer.html" %}
-    </div>
-</body>
-</html>
+{% extends "global/base.html" %}
+
+{% block content %}
+{% include "appointment/partials/appointmentConfirmation.html" %}
+{% endblock content %}
+
