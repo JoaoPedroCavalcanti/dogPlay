@@ -2,12 +2,14 @@
     <section class="confirmation-section">
         <h2>Confirmação de Agendamento</h2>
         <div class="confirmation-details">
-            <p><strong>Nome da Pessoa:</strong> João Silva</p>
-            <p><strong>Nome do Cachorro:</strong> Rex</p>
-            <p><strong>Horário de Entrada:</strong> 10:00 AM</p>
-            <p><strong>Horário de Saída:</strong> 5:00 PM</p>
-            <p><strong>Data:</strong> 25/07/2024</p>
+            <p><strong>Person`s Name: </strong> {{dataConfirmation.name}} </p>
+            <p><strong>Dog`s Name:</strong> {{dataConfirmation.dogName}} </p>
+            <p><strong>Check-In:</strong> {{dataConfirmation.checkIn}} </p>
+            <p><strong>Check-out:</strong> {{dataConfirmation.checkOut}} </p>
+            <p><strong>Date:</strong> {{dataConfirmation.date}} </p>
         </div>
-        <button onclick="location.href='index.html'">Voltar para a Home</button>
+        <a href = {% url 'appointment:home' %}>
+            <button>Back to Appointments</button>
+        </a>
     </section>
 </main>

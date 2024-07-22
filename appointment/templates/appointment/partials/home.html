@@ -2,14 +2,14 @@
     <section class="list-section">
         <h2>Eventos</h2>
         <div class="event-list">
-            <div class="event-item">
-                <p>Data: 20/07/2024</p>
-                <p>Horário: 14:00</p>
-            </div>
-            <div class="event-item">
-                <p>Data: 21/07/2024</p>
-                <p>Horário: 15:00</p>
-            </div>
+            {% for dateAndTime in datesAndTimes %}
+                <a href = {% url 'appointment:confirmation' 1 %}>
+                    <div class="event-item">
+                        <p>Data: {{ dateAndTime.date }}</p>
+                        <p>Horário: {{ dateAndTime.time }}</p>
+                    </div>
+                </a>
+            {% endfor %}
             <!-- Adicione mais itens aqui -->
         </div>
     </section>
