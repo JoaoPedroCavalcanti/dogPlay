@@ -1,10 +1,5 @@
-{% include "appointment/partials/homeAppointment.html" %}
+{% extends "global/base.html" %}
 
-<body>
-    <div class="container">
-        {% include "appointment/partials/navbar.html" %}
-        {% include "appointment/partials/appointmentHomeSection.html" %}
-        {% include "appointment/partials/footer.html" %}
-    </div>
-</body>
-</html>
+{% block content %}
+{% include "appointment/partials/appointmentHomeSection.html" %}
+{% endblock content %}
