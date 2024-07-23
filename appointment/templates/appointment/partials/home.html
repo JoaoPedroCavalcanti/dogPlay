@@ -3,7 +3,7 @@
         <h2>Eventos</h2>
         <div class="event-list">
             {% for dateAndTime in datesAndTimes %}
-                <a href = {% url 'appointment:confirmation' 1 %}>
+                <a href = {% url 'appointment:confirmation' dateAndTime.id %}>
                     <div class="event-item">
                         <p>Data: {{ dateAndTime.date }}</p>
                         <p>Horário: {{ dateAndTime.time }}</p>

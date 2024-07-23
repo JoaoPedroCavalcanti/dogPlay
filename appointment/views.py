@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Appointment
 # To import dateAndTimeFuncion that is in another file
 import sys
 import os
@@ -15,13 +16,16 @@ from randomDateAndTime import generate_random_date_time, generate_random_data
 # print(a)
 
 def appointmentHome(req):
+    appointments = Appointment.objects.all().order_by('-id')
     return render(req, 'appointment/pages/appointmentHome.html', context={
-        'datesAndTimes': [generate_random_date_time() for _ in range(10)]
+        'datesAndTimes': appointments
     })
 
 def appointmentConfirmation(req, id):
+    appointments = Appointment.objects.filter(id = id)
     return render(req, 'appointment/pages/appointmentConfirmation.html', context={
-        'dataConfirmation': generate_random_data()
+        # 'dataConfirmation': generate_random_data()
+        'dataConfirmation': appointments.first()
     })
 
 
