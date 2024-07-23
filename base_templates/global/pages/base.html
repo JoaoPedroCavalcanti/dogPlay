@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
 
-{% include "appointment/partials/head.html" %}
+{% include "global/partials/head.html" %}
 <title>{% block title %}{% endblock title %}</title>
 </head>
 
 <body>
     <div class="container">
-        {% include "appointment/partials/navbar.html" %}
+        {% include "global/partials/navbar.html" %}
 
         {% block content %}{% endblock content %}
 
-        {% include "appointment/partials/footer.html" %}
+        {% include "global/partials/footer.html" %}
     </div>
 </body>
 </html>

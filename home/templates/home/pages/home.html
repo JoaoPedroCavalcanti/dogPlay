@@ -22,9 +22,11 @@
                 <button onclick="location.href='#'">Log in</button>
             </div>
         </nav>
-        <main class="main-content">
+        <main class="main-content-homePage">
             <div style="background-image: url('{% static 'home/images/dogHome.jpg' %}');"class="background-image">
-                <button>Make an appointment</button>
+                <a href = {% url 'appointment:home' %}>
+                    <button>Make an Appointment</button>
+                </a>
             </div>
         </main>
         <section class="about-section">
