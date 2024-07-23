@@ -1,6 +1,6 @@
 <main class="main-content">
     <section class="list-section">
-        <h2>Eventos</h2>
+        <h2>Appointments</h2>
         <div class="event-list">
             {% for dateAndTime in datesAndTimes %}
                 <a href = {% url 'appointment:confirmation' dateAndTime.id %}>
@@ -9,8 +9,10 @@
                         <p>Horário: {{ dateAndTime.time }}</p>
                     </div>
                 </a>
+            {% empty %}
+                <h1>No Appointments available</h1> 
             {% endfor %}
-            <!-- Adicione mais itens aqui -->
+
         </div>
     </section>
 
