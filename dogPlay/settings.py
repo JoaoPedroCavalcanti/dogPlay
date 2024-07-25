@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'appointment',
     'home',
+    'petOwner',
 ]
 
 MIDDLEWARE = [
