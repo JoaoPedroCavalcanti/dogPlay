@@ -1,5 +1,10 @@
 from django.shortcuts import render
+from petOwner.forms import RegisterForm
 
 # Create your views here.
 def registerPetOwner(req):
-    return render(req, 'petOwner/pages/register.html')
+    
+    form = RegisterForm()
+    return render(req, 'petOwner/pages/register.html', context={
+        'form': form,
+    })
