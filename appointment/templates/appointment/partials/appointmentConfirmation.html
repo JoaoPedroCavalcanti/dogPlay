@@ -2,14 +2,15 @@
     <section class="confirmation-section">
         <h2>Confirmação de Agendamento</h2>
         <div class="confirmation-details">
-            <p><strong>Person`s Name: </strong> John </p>
-            <p><strong>Dog`s Name:</strong> Sheba </p>
+            <p><strong>Person's Name: </strong> John </p>
+            <p><strong>Dog's Name:</strong> Sheba </p>
             <p><strong>Check-In:</strong> {{dataConfirmation.time}} </p>
             <p><strong>Check-out:</strong> 22 p.m. </p>
             <p><strong>Date:</strong> {{dataConfirmation.date}} </p>
         </div>
-        <a href = {% url 'appointment:home' %}>
-            <button>Back to Appointments</button>
+        <button class="btn-confirm" onclick="openPopup()">Confirm Appointment</button><br>
+        <a href="{% url 'appointment:home' %}">
+            <button class="btn">Back to Appointments</button>
         </a>
     </section>
 </main>
