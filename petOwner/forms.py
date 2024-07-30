@@ -35,12 +35,16 @@ class RegisterForm(forms.ModelForm):
     #         'at least 8 characters.'
     #     )
     # )
-    password2 = forms.CharField(
-        required=True,
-        widget=forms.PasswordInput(attrs={
-            'placeholder': 'Repeat your password'
-        })
-    )
+    
+    
+    # password2 = forms.CharField(
+    #     required=True,
+    #     widget=forms.PasswordInput(attrs={
+    #         'placeholder': 'Repeat your password'
+    #     })
+    # )
+
+
 
     class Meta:
         model = User
@@ -77,45 +81,45 @@ class RegisterForm(forms.ModelForm):
         #     })
         # }
 
-    def clean_password(self):
-        data = self.cleaned_data.get('password')
+    # def clean_password(self):
+    #     data = self.cleaned_data.get('password')
 
-        if 'teste' in data:
-            raise ValidationError(
-                'Não digite %(value)s no campo password',
-                code='invalid',
-                params={'value': '"teste"'}
-            )
+    #     if 'teste' in data:
+    #         raise ValidationError(
+    #             'Não digite %(value)s no campo password',
+    #             code='invalid',
+    #             params={'value': '"teste"'}
+    #         )
 
 
-        return data
+    #     return data
 
-    def clean_first_name(self):
-        data = self.cleaned_data.get('first_name')
+    # def clean_first_name(self):
+    #     data = self.cleaned_data.get('first_name')
 
-        if 'John Doe' in data:
-            raise ValidationError(
-                'Não digite %(value)s no campo first name',
-                code='invalid',
-                params={'value': '"John Doe"'}
-            )
+    #     if 'John Doe' in data:
+    #         raise ValidationError(
+    #             'Não digite %(value)s no campo first name',
+    #             code='invalid',
+    #             params={'value': '"John Doe"'}
+    #         )
 
-        return data
+    #     return data
     
-    def clean(self):
-        cleaned_data = super().clean()
+    # def clean(self):
+    #     cleaned_data = super().clean()
 
-        password = cleaned_data.get('password')
-        password2 = cleaned_data.get('password2')
+    #     password = cleaned_data.get('password')
+    #     password2 = cleaned_data.get('password2')
 
-        if password != password2:
-            password_confirmation_error = ValidationError(
-                'Password and password2 must be equal',
-                code='invalid'
-            )
-            raise ValidationError({
-                'password': password_confirmation_error,
-                'password2': [
-                    password_confirmation_error,
-                ],
-            })
+    #     if password != password2:
+    #         password_confirmation_error = ValidationError(
+    #             'Password and password2 must be equal',
+    #             code='invalid'
+    #         )
+    #         raise ValidationError({
+    #             'password': password_confirmation_error,
+    #             'password2': [
+    #                 password_confirmation_error,
+    #             ],
+    #         })

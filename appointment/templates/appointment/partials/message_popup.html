@@ -1,18 +1,11 @@
-{% if messages %}
-    {% for message in messages %}
+<div class="popup-overlay" id="popup-overlay"></div>
+<div class="popup" id="popup">
 
-        <div class="popup-overlay" id="popup-overlay"></div>
-        <div class="popup" id="popup">
-            <div class="message {{ message.tags }}">
-                <h2>Success</h2>
-                <p>{{ message }}</p>
-            </div>
-            <a href="{% url 'appointment:myAppointments' %}">
-                <button class="btn">My Appointments</button>
-            </a>
-            <br>
-            <button onclick="closePopup()">Close</button>
-        </div>
-        
-    {% endfor %}
-{% endif %}
+    {% include "global/partials/message.html" %}
+
+    <a href="{% url 'appointment:myAppointments' %}">
+        <button class="btn">My Appointments</button>
+    </a>
+    <br>
+    <button onclick="closePopup()">Close</button>
+</div>
