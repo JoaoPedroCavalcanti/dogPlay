@@ -5,7 +5,7 @@
         <button class="signup-close-btn" onclick="closeSignupPopup()">×</button>
     </div>
     <div class="signup-popup-content">
-        <form id="signup-form" action="{% url "petOwner:create" %}" method="POST">
+        <form id="signup-form" action="{% url "_register" %}" method="POST">
             {% csrf_token %}
             {% for field in form %}
                 <div class="signup-form-group">

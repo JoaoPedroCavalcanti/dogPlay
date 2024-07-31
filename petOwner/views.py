@@ -30,6 +30,10 @@ def createPetowner(req):
         
     return redirect('petOwner:register')
     
+def loginPetOwner(req):
+    return render(req, 'petOwner/pages/login.html')
 
-
+def create_login(req):
+    return render(req, 'petOwner/pages/login.html')
+    
 
