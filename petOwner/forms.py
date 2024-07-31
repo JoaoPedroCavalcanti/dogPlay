@@ -1,17 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from utils.django_forms import add_attr, add_placeholder
 
-
-def add_attr(field, attr_name, attr_new_val):
-    existing = field.widget.attrs.get(attr_name, '')
-    field.widget.attrs[attr_name] = f'{existing} {attr_new_val}'.strip()
-
-
-def add_placeholder(field, placeholder_val):
-    add_attr(field, 'placeholder', placeholder_val)
-
-
+# register
 class RegisterForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -33,7 +25,15 @@ class RegisterForm(forms.ModelForm):
         ),
         label='Password'
     )
-    
+    class Meta:
+        model = User
+        fields = [
+            'first_name',
+            'last_name',
+            'username',
+            'email',
+            'password',
+        ]
     
     # password2 = forms.CharField(
     #     required=True,
@@ -44,15 +44,7 @@ class RegisterForm(forms.ModelForm):
 
 
 
-    class Meta:
-        model = User
-        fields = [
-            'first_name',
-            'last_name',
-            'username',
-            'email',
-            'password',
-        ]
+
         # exclude = ['first_name']
         # labels = {
         #     'username': 'Username',
@@ -95,11 +87,11 @@ class RegisterForm(forms.ModelForm):
     # def clean_first_name(self):
     #     data = self.cleaned_data.get('first_name')
 
-    #     if 'John Doe' in data:
+    #     if 'teste' in data:
     #         raise ValidationError(
     #             'Não digite %(value)s no campo first name',
     #             code='invalid',
-    #             params={'value': '"John Doe"'}
+    #             params={'value': '"teste"'}
     #         )
 
     #     return data
@@ -121,3 +113,14 @@ class RegisterForm(forms.ModelForm):
     #                 password_confirmation_error,
     #             ],
     #         })
+    
+    
+    
+    
+# Login
+class LoginForm(forms.Form):
+    username = forms.CharField()
+    password = forms.CharField(
+        widget=forms.PasswordInput()
+    )
+        
