@@ -21,20 +21,18 @@ class RegisterForm(forms.ModelForm):
         add_placeholder(self.fields['last_name'], 'Ex.: Doe')
         add_attr(self.fields['username'], 'css', 'a-css-class')
 
-    # password = forms.CharField(
-    #     required=True,
-    #     widget=forms.PasswordInput(attrs={
-    #         'placeholder': 'Your password'
-    #     }),
-    #     error_messages={
-    #         'required': 'Password must not be empty'
-    #     },
-    #     help_text=(
-    #         'Password must have at least one uppercase letter, '
-    #         'one lowercase letter and one number. The length should be '
-    #         'at least 8 characters.'
-    #     )
-    # )
+    password = forms.CharField(
+        widget=forms.PasswordInput(),
+        error_messages={
+            'required': 'Password must not be empty'
+        },
+        help_text=(
+            'Password must have at least one uppercase letter, '
+            'one lowercase letter and one number. The length should be '
+            'at least 8 characters.'
+        ),
+        label='Password'
+    )
     
     
     # password2 = forms.CharField(
