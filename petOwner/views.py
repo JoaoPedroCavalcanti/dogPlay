@@ -29,6 +29,7 @@ def createPetowner(req):
         
         messages.success(req, 'Your user is created, please log in.')
         del(req.session['register_form_data'])
+        return redirect(reverse('petOwner:login'))
         
     return redirect('petOwner:register')
 
