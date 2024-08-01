@@ -3,6 +3,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from petOwner.forms import RegisterForm, LoginForm
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
 
 # Register
 def registerPetOwner(req):  
@@ -41,6 +42,30 @@ def loginPetOwner(req):
     })
 
 def create_login(req):
-    return render(req, 'petOwner/pages/login.html')
+    if not req.POST:
+        raise Http404()
+    
+    POST = req.POST
+    form = LoginForm(POST)
+    
+    if form.is_valid():
+        authenticated_user = authenticate(
+            username = form.cleaned_data.get('username', ''),
+            password = form.cleaned_data.get('password', ''),
+        )
+        
+        if authenticated_user and authenticated_user is not None:
+            messages.success(req, 'You are logged.')
+            login(req, authenticated_user)
+        
+        else:
+            messages.error(req, 'Invalid credentials.')
+            
+    else:
+        messages.error(req, 'Invalid form.')
+        
+    
+        
+    return redirect(reverse('petOwner:login'))
     
 
