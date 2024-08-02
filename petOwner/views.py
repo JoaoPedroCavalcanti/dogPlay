@@ -3,7 +3,8 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 from petOwner.forms import RegisterForm, LoginForm
 from django.urls import reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Register
 def registerPetOwner(req):  
@@ -12,6 +13,7 @@ def registerPetOwner(req):
     return render(req, 'petOwner/pages/register.html', {
         'form': form,
         'form_action': reverse('petOwner:create_register'),
+        'singup_or_login' : 'Sing up',
     })
     
 def createPetowner(req):
@@ -40,6 +42,7 @@ def loginPetOwner(req):
     return render(req, 'petOwner/pages/login.html', {
         'form': form,
         'form_action': reverse('petOwner:create_login'),
+        'singup_or_login' : 'Log in',
     })
 
 def create_login(req):
@@ -69,4 +72,10 @@ def create_login(req):
         
     return redirect(reverse('petOwner:login'))
     
-
+@login_required(login_url='petOwner:login', redirect_field_name='next')
+def logout_view(req):
+    if not req.POST:
+        return redirect(reverse('petOwner:login'))
+    
+    logout(req)
+    return redirect(reverse('petOwner:login'))
