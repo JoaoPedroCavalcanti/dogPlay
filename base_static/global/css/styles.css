@@ -436,9 +436,10 @@ button {
 
 .signup-btn-submit:hover {
     background-color: var(--color-success-light);
+    color: #000;
 }
 
-/* register_form.css */
+/* basic_form */
 .user-signup-container {
     max-width: 400px;
     margin: 0 auto;
@@ -491,5 +492,43 @@ button {
 .help-text{
     font-size: 80%;
     margin: 2px 0;
+}
+
+/* you are logged */
+.you_are_logged {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    margin: 50px auto; /* Centraliza horizontalmente */
+    width: 80%; /* Ajuste conforme necessário */
+    max-width: 400px; /* Ajuste conforme necessário */
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.you_are_logged p {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    color: #444;
+}
+
+.you_are_logged button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--color-success-dark);
+    color: white;
+}
+
+.you_are_logged button:hover {
+    background-color: #c2d1c3;
+    color: #000;
 }
 

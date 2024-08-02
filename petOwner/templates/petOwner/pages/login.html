@@ -3,7 +3,21 @@
 
 {% block content %}
 
-{% include "petOwner/partials/register_form.html" %}
+{% if not request.user.is_authenticated %}
+    {% include "petOwner/partials/basic_form.html" %}
+{% endif %}
 
+{% if user.is_authenticated %}
+    <div class="you_are_logged">
+        <p>You are logged as {{ request.user.username }}.</p>
+        <a href="{% url "petOwner:dashboard" %}">
+            <button>My dashboard</button>
+        </a>
+        <form action="{% url "petOwner:logout" %}" method="POST">
+            {% csrf_token %}
+            <button>Log out</button>
+        </form>
+    </div>
+{% endif %}
 
 {% endblock content %}
