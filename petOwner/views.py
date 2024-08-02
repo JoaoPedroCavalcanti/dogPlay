@@ -59,7 +59,7 @@ def create_login(req):
         )
         
         if authenticated_user and authenticated_user is not None:
-            messages.success(req, 'You are logged.')
+            # messages.success(req, 'You are logged.')
             login(req, authenticated_user)
         
         else:
@@ -70,7 +70,7 @@ def create_login(req):
         
     
         
-    return redirect(reverse('petOwner:login'))
+    return redirect(reverse('petOwner:dashboard'))
     
 @login_required(login_url='petOwner:login', redirect_field_name='next')
 def logout_view(req):
@@ -79,3 +79,7 @@ def logout_view(req):
     
     logout(req)
     return redirect(reverse('petOwner:login'))
+
+@login_required(login_url='petOwner:login', redirect_field_name='next')
+def dashboard(req):
+    return render(req, 'petOwner/pages/dashboard.html')
