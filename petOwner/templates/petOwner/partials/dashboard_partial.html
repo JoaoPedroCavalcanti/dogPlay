@@ -1,6 +1,14 @@
 <main class="main-content">
+    <div class="name-center">
+        <h2>Hello {{ petOwnerName }}</h2>
+        <form action="{% url "petOwner:logout" %}" method="POST">
+            {% csrf_token %}
+            <h3>Click <button>Here</button> to logout.</h3>
+        </form>
+        
+    </div>
     <section class="list-section">
-        <h2> {{ petOwnerName }} Appointments</h2>
+        <h2>Your Appointments</h2>
         <div class="event-list">
 
             {% for appointment in future_appointments %}
@@ -17,7 +25,7 @@
         </div>
     </section>
     <section class="list-section">
-        <h2> {{ petOwnerName }} past Appointments</h2>
+        <h2>Your past Appointments</h2>
         <div class="event-list">
 
             {% for appointment in past_appointments %}

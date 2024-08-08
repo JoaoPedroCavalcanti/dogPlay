@@ -6,11 +6,17 @@
         <li><a href="#">Contact</a></li>
     </ul>
     <div class="nav-buttons">
-        <a href="{% url "petOwner:register" %}">
-            <button>Sing up</button>
-        </a>
-        <a href="{% url "petOwner:login" %}">
-            <button>Log In</button>
-        </a>
+        {% if user.is_authenticated %}
+            <a href="{% url "petOwner:dashboard" %}">
+                <button>Dashboard</button>
+            </a>
+        {% else %}
+            <a href="{% url "petOwner:register" %}">
+                <button>Sing up</button>
+            </a>
+            <a href="{% url "petOwner:login" %}">
+                <button>Log In</button>
+            </a>
+        {% endif %}
     </div>
 </nav>
