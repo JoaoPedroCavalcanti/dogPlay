@@ -5,6 +5,7 @@ from petOwner.forms import RegisterForm, LoginForm
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from appointment.models import Appointment
 
 # Register
 def registerPetOwner(req):  
@@ -82,4 +83,12 @@ def logout_view(req):
 
 @login_required(login_url='petOwner:login', redirect_field_name='next')
 def dashboard(req):
-    return render(req, 'petOwner/pages/dashboard.html')
+    appointments = Appointment.objects.filter(
+        petOwner = req.user
+    )
+    petOwnerName = req.user
+    return render(req, 'petOwner/pages/dashboard.html', context={
+        'appointments': appointments,
+        'petOwnerName': petOwnerName
+        
+    })
