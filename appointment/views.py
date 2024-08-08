@@ -24,7 +24,7 @@ def appointmentConfirmation(req, id):
     
     appointment = get_object_or_404(Appointment, pk = id)
     return render(req, 'appointment/pages/appointmentConfirmation.html', context={
-        'dataConfirmation': appointment
+        'appointment': appointment
     })
 
 def my_appointments(req):

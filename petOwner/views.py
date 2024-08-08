@@ -107,3 +107,11 @@ def appointment(req, id):
     return render(req, 'petOwner/pages/appointment.html', context={
         'appointment': appointment
     })
+
+@login_required(login_url='petOwner:login', redirect_field_name='next')
+def assign_appointment(req, id):
+    appointment = get_object_or_404(Appointment, pk=id)
+    if not appointment.petOwner:
+        appointment.petOwner = req.user
+        appointment.save()
+    return redirect(reverse('petOwner:appointment', args=[id]))

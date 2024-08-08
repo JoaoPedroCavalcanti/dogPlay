@@ -547,3 +547,14 @@ button {
     background-color: #f33b3b;
     color: white;
 }
+
+.btn-confirm-login {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #70f438;
+}
+.btn-confirm-login:hover {
+    background-color: #a8a8a8; /* Cor de fundo ao passar o mouse */
+}
