@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from appointment.models import Appointment
+from utils.past_and_future_appointments import past_and_future_appointments
 
 # Register
 def registerPetOwner(req):  
@@ -86,9 +87,15 @@ def dashboard(req):
     appointments = Appointment.objects.filter(
         petOwner = req.user
     )
+    
+    
+    past_appointments, future_appointments = past_and_future_appointments(appointments)
+    
+    print(future_appointments)
     petOwnerName = req.user
     return render(req, 'petOwner/pages/dashboard.html', context={
-        'appointments': appointments,
+        'future_appointments': future_appointments,
+        'past_appointments': past_appointments,
         'petOwnerName': petOwnerName
         
     })

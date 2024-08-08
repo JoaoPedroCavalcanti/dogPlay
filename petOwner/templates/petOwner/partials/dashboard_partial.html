@@ -3,13 +3,30 @@
         <h2> {{ petOwnerName }} Appointments</h2>
         <div class="event-list">
 
-            {% for appointment in appointments %}
-                <a href="">
-                    <div class="event-item">
-                        <p>Date: {{ appointment.date }}</p>
-                        <p>Time: {{ appointment.time }}</p>
-                    </div>
-                </a>
+            {% for appointment in future_appointments %}
+
+                <div class="event-item">
+                    <p>Date: {{ appointment.date }}</p>
+                    <p>Time: {{ appointment.time }}</p>
+                </div>
+
+            {% empty %}
+                <p>You do not have appointments</p>
+            {% endfor %}
+
+        </div>
+    </section>
+    <section class="list-section">
+        <h2> {{ petOwnerName }} past Appointments</h2>
+        <div class="event-list">
+
+            {% for appointment in past_appointments %}
+
+                <div class="event-item">
+                    <p>Date: {{ appointment.date }}</p>
+                    <p>Time: {{ appointment.time }}</p>
+                </div>
+
             {% empty %}
                 <p>You do not have appointments</p>
             {% endfor %}
@@ -17,18 +34,3 @@
         </div>
     </section>
 </main>
-
-<div>
-    {% for appointment in appointments %}
-    <div>
-        {{ appointment.date }} <br>
-        {{ appointment.time }} <br>
-        {{ appointment.petOwner }}
-        {{ appointment.petOwner }}
-
-
-    </div>
-    {% empty %}
-        <p>You do not have appointments</p>
-    {% endfor %}
-</div> 
