@@ -13,10 +13,12 @@
 
             {% for appointment in future_appointments %}
 
-                <div class="event-item">
-                    <p>Date: {{ appointment.date }}</p>
-                    <p>Time: {{ appointment.time }}</p>
-                </div>
+            <a href = {% url 'petOwner:appointment' appointment.id %}>
+                    <div class="event-item">
+                        <p>Date: {{ appointment.date }}</p>
+                        <p>Time: {{ appointment.time }}</p>
+                    </div>
+                </a>
 
             {% empty %}
                 <p>You do not have appointments</p>

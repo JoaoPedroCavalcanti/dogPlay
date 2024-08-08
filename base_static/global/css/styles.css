@@ -535,3 +535,15 @@ button {
 .name-center{
     text-align: center;
 }
+
+.btn-cancel{
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #f0645f;
+}
+.btn-cancel:hover {
+    background-color: #f33b3b;
+    color: white;
+}

@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.http import Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from petOwner.forms import RegisterForm, LoginForm
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -98,4 +98,12 @@ def dashboard(req):
         'past_appointments': past_appointments,
         'petOwnerName': petOwnerName
         
+    })
+
+@login_required(login_url='petOwner:login', redirect_field_name='next')
+def appointment(req, id):
+    
+    appointment = get_object_or_404(Appointment, pk = id)
+    return render(req, 'petOwner/pages/appointment.html', context={
+        'appointment': appointment
     })

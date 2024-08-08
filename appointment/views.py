@@ -22,7 +22,7 @@ def appointmentConfirmation(req, id):
     # Message to confirm appointment
     messages.success(req, 'Appointment confirmed')
     
-    appointment = get_object_or_404(Appointment, pk = id)   
+    appointment = get_object_or_404(Appointment, pk = id)
     return render(req, 'appointment/pages/appointmentConfirmation.html', context={
         'dataConfirmation': appointment
     })
