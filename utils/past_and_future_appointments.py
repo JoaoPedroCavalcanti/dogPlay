@@ -1,6 +1,5 @@
 from datetime import datetime
 
-
 def checkIfAppointmentIsOld(appointment):
     now = datetime.now()
     now_date = now.date()
@@ -12,7 +11,7 @@ def checkIfAppointmentIsOld(appointment):
     
     if appointment_date < now_date:
         return True
-    if appointment_time < now_time:
+    if appointment_date == now_date and appointment_time < now_time:
         return True
     return False
 
@@ -26,4 +25,5 @@ def past_and_future_appointments(appointments):
             future_appointments.append(appointment)
         
     return past_appointments, future_appointments
-    
+
+

@@ -9,7 +9,7 @@ class Appointment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     is_confirmed = models.BooleanField(default=False)
     petOwner = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True
+        User, on_delete=models.SET_NULL, null=True, blank=True
     )
     
     def __str__(self):
@@ -17,4 +17,3 @@ class Appointment(models.Model):
         strTime = str(self.time)
         nameItself = strDate + ' | ' + strTime+'h'
         return nameItself
-    

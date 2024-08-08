@@ -2,11 +2,11 @@
     <section class="list-section">
         <h2>Appointments</h2>
         <div class="event-list">
-            {% for dateAndTime in datesAndTimes %}
-                <a href = {% url 'appointment:confirmation' dateAndTime.id %}>
+            {% for appointment in appointments %}
+                <a href = {% url 'appointment:confirmation' appointment.id %}>
                     <div class="event-item">
-                        <p>Data: {{ dateAndTime.date }}</p>
-                        <p>Horário: {{ dateAndTime.time }}</p>
+                        <p>Data: {{ appointment.date }}</p>
+                        <p>Horário: {{ appointment.time }}</p>
                     </div>
                 </a>
             {% empty %}
