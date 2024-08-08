@@ -6,7 +6,11 @@
         <li><a href="#">Contact</a></li>
     </ul>
     <div class="nav-buttons">
-        <button onclick="location.href='#'">Sing up</button>
-        <button onclick="location.href='#'">Log In</button>
+        <a href="{% url "petOwner:register" %}">
+            <button>Sing up</button>
+        </a>
+        <a href="{% url "petOwner:login" %}">
+            <button>Log In</button>
+        </a>
     </div>
 </nav>
