@@ -8,7 +8,12 @@
             <p><strong>Check-out:</strong> 22 p.m. </p>
             <p><strong>Date:</strong> {{appointment.date}} </p>
         </div>
-        <button class="btn-cancel">Cancel Appointment</button><br>
+
+            <form action="{% url "petOwner:unassign_appointment" appointment.id %}" method="POST">
+                {% csrf_token %}
+                <button class="btn-cancel">Cancel Appointment</button><br>
+            </form>
+            
         <a href="{% url 'petOwner:dashboard' %}">
             <button class="btn">Back to my Appointments</button>
         </a>

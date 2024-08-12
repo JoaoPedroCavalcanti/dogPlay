@@ -110,8 +110,22 @@ def appointment(req, id):
 
 @login_required(login_url='petOwner:login', redirect_field_name='next')
 def assign_appointment(req, id):
+    if not req.POST:
+        return redirect(reverse('appointment:home'))
+    
     appointment = get_object_or_404(Appointment, pk=id)
     if not appointment.petOwner:
         appointment.petOwner = req.user
         appointment.save()
     return redirect(reverse('petOwner:appointment', args=[id]))
+
+@login_required(login_url='petOwner:login', redirect_field_name='next')
+def unassign_appointment(req, id):
+    if not req.POST:
+        return redirect(reverse('petOwner:dashboard'))
+    
+    appointment = get_object_or_404(Appointment, pk=id)
+    if appointment.petOwner:
+        appointment.petOwner = None
+        appointment.save()
+    return redirect(reverse('petOwner:dashboard'))
