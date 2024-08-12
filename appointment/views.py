@@ -9,9 +9,6 @@ def appointmentHome(req):
         petOwner = None
     )
     past_appointments, future_appointments = past_and_future_appointments(appointments)
-
-    print(past_appointments)
-    print(future_appointments)
     
     return render(req, 'appointment/pages/appointmentHome.html', context={
         'appointments': future_appointments

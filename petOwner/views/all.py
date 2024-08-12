@@ -91,7 +91,6 @@ def dashboard(req):
     
     past_appointments, future_appointments = past_and_future_appointments(appointments)
     
-    print(future_appointments)
     petOwnerName = req.user
     return render(req, 'petOwner/pages/dashboard.html', context={
         'future_appointments': future_appointments,
