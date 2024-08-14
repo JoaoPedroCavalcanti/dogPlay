@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Appointment
+from appointment.models import Appointment
 from django.contrib import messages
 from utils.past_and_future_appointments import past_and_future_appointments
 
