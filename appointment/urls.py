@@ -9,16 +9,25 @@ urlpatterns = [
          views.site.appointmentHome, 
          name='home'
     ), #The name will be appointment:home
+    
     path('<int:id>/', 
          views.site.appointmentConfirmation, 
          name='confirmation'
     ),#The name will be appointment:confirmation
+    
     path('my-appointments/', 
          views.site.my_appointments, 
          name='myAppointments'
     ),
-    path('api/v1', 
+    
+    path('api/v1/', 
          views.api.appointments_api_list, 
-         name='appointments_api_v1'
+         name='appointments_list_api_v1'
     ),
+    
+        path('api/v1/<int:id>/', 
+         views.api.appointments_api_detail, 
+         name='appointments_detail_api_v1'
+    ),
+        
 ]
