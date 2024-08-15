@@ -7,11 +7,15 @@ from rest_framework import status
 from django.contrib.auth.models import User
 
 
-@api_view()
+@api_view(http_method_names=['get', 'post'])
 def appointments_api_list(request):
-    appointments = Appointment.objects.all()
-    serializer = AppointmentSerializer(instance=appointments, many=True, context={'request': request})
-    return Response(serializer.data)
+    if request.method == 'GET':
+        appointments = Appointment.objects.all()
+        serializer = AppointmentSerializer(instance=appointments, many=True, context={'request': request})
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+        return Response(data, status=status.HTTP_201_CREATED)
 
 @api_view()
 def appointments_api_detail(request, id):
