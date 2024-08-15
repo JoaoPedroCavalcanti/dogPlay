@@ -15,7 +15,13 @@ def appointments_api_list(request):
         return Response(serializer.data)
     
     elif request.method == 'POST':
-        return Response(data, status=status.HTTP_201_CREATED)
+        data = request.data
+        serialized_data = AppointmentSerializer(data=data)
+
+        serialized_data.is_valid(raise_exception=True)
+        serialized_data.save()
+        
+        return Response(serialized_data.data, status=status.HTTP_201_CREATED)
 
 @api_view()
 def appointments_api_detail(request, id):
@@ -28,3 +34,5 @@ def user_api_detail(request, id):
     user = get_object_or_404(User, id=id)
     serializer = UserSerializer(instance=user, many=False, context={'request': request})
     return Response(serializer.data)
+
+    
