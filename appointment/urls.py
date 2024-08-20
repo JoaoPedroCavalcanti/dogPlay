@@ -21,12 +21,12 @@ urlpatterns = [
     ),
     
     path('api/v1/', 
-         views.api.appointments_api_list, 
+         views.api.AppointmentAPIV1List.as_view(),
           name='appointments_list_api_v1'
     ),
     
      path('api/v1/<int:id>/',
-          views.api.appointment_api_detail, 
+          views.api.AppointmentAPIV1Detail.as_view(), 
           name='appointment_detail_api_v1'
     ),
      
