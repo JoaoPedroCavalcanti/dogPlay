@@ -6,49 +6,24 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.pagination import PageNumberPagination
 
 class AppointmentAPIV1Pagination(PageNumberPagination):
-    page_size = 2
+    page_size = 10
 
 class AppointmentAPIV1List(ListCreateAPIView):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
     pagination_class = AppointmentAPIV1Pagination
+    # lookup_field = 'id'
+
+
     
-    
-class AppointmentAPIV1Detail(APIView):
-    def get_appointment(self, id):
-        appointment = get_object_or_404(Appointment, id=id)
-        return appointment
-    
-    def get(self, request, id):
-        appointment = self.get_appointment(id)
-        serializer = AppointmentSerializer(
-            instance=appointment, 
-            many=False, 
-            context={'request': request}
-        )
-        return Response(serializer.data)
-    
-    def patch(self, request, id):
-        appointment = self.get_appointment(id)
-        serializer = AppointmentSerializer(
-            instance=appointment,
-            data = request.data,
-            many=False,
-            partial = True,
-            context={'request': request}
-        )
-        serializer.is_valid()
-        serializer.save()
-        return Response(serializer.data)
-    
-    def delete(self, request, id):
-        appointment = self.get_appointment(id)
-        appointment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+class AppointmentAPIV1Detail(RetrieveUpdateDestroyAPIView):
+    queryset = Appointment.objects.all()
+    serializer_class = AppointmentSerializer
+    pagination_class = AppointmentAPIV1Pagination
 
 @api_view(http_method_names=['get', 'post'])
 def appointments_api_list(request):

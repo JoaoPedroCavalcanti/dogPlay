@@ -10,9 +10,9 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = ['id', 'time', 'date', 'petOwner', 'petOwner_link', 'is_confirmed']
+        # lookup_field = 'id'
         
-    # public = serializers.BooleanField(source='is_confirmed', read_only=True)
-    # time_and_date = serializers.SerializerMethodField(method_name= get_time_and_date,read_only=True)
+        
     
     petOwner_link = serializers.HyperlinkedRelatedField(
         many=False,

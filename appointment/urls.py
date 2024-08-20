@@ -25,7 +25,7 @@ urlpatterns = [
           name='appointments_list_api_v1'
     ),
     
-     path('api/v1/<int:id>/',
+     path('api/v1/<int:pk>/',
           views.api.AppointmentAPIV1Detail.as_view(), 
           name='appointment_detail_api_v1'
     ),
