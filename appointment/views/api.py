@@ -6,26 +6,34 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
+from rest_framework.generics import ListCreateAPIView
+from rest_framework.pagination import PageNumberPagination
 
-class AppointmentAPIV1List(APIView):
-    def get(self, request):
-        appointments = Appointment.objects.all()
-        serializer = AppointmentSerializer(instance=appointments, many=True, context={'request': request})
-        return Response(serializer.data)
+class AppointmentAPIV1Pagination(PageNumberPagination):
+    page_size = 2
+
+class AppointmentAPIV1List(ListCreateAPIView):
+    queryset = Appointment.objects.all()
+    serializer_class = AppointmentSerializer
+    pagination_class = AppointmentAPIV1Pagination
+    # def get(self, request):
+    #     appointments = Appointment.objects.all()
+    #     serializer = AppointmentSerializer(instance=appointments, many=True, context={'request': request})
+    #     return Response(serializer.data)
 
         
-    def post(self, request):
-        data = request.data
-        serialized_data = AppointmentSerializer(
-            data=data,
-            context={'request': request}
-        )
+    # def post(self, request):
+    #     data = request.data
+    #     serialized_data = AppointmentSerializer(
+    #         data=data,
+    #         context={'request': request}
+    #     )
 
-        serialized_data.is_valid(raise_exception=True)
-        print(serialized_data)
-        serialized_data.save()
+    #     serialized_data.is_valid(raise_exception=True)
+    #     print(serialized_data)
+    #     serialized_data.save()
         
-        return Response(serialized_data.data, status=status.HTTP_201_CREATED)
+    #     return Response(serialized_data.data, status=status.HTTP_201_CREATED)
     
 class AppointmentAPIV1Detail(APIView):
     def get_appointment(self, id):
