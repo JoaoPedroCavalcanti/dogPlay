@@ -16,24 +16,7 @@ class AppointmentAPIV1List(ListCreateAPIView):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
     pagination_class = AppointmentAPIV1Pagination
-    # def get(self, request):
-    #     appointments = Appointment.objects.all()
-    #     serializer = AppointmentSerializer(instance=appointments, many=True, context={'request': request})
-    #     return Response(serializer.data)
-
-        
-    # def post(self, request):
-    #     data = request.data
-    #     serialized_data = AppointmentSerializer(
-    #         data=data,
-    #         context={'request': request}
-    #     )
-
-    #     serialized_data.is_valid(raise_exception=True)
-    #     print(serialized_data)
-    #     serialized_data.save()
-        
-    #     return Response(serialized_data.data, status=status.HTTP_201_CREATED)
+    
     
 class AppointmentAPIV1Detail(APIView):
     def get_appointment(self, id):
