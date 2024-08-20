@@ -27,12 +27,12 @@ class AppointmentSerializer(serializers.ModelSerializer):
         return f'Time: {appointment.time} and Date: {appointment.date}'
     
     
-    def validate(self, attrs):
-        if attrs['is_confirmed'] == False:
-            raise serializers.ValidationError({
-                "Error description": "is_confirmed should be True"
-            })
-        return attrs
+    # def validate(self, attrs):
+    #     if attrs['is_confirmed'] == False:
+    #         raise serializers.ValidationError({
+    #             "Error description": "is_confirmed should be True"
+    #         })
+    #     return attrs
     
     # def validate_is_confirmed(self, value):
     #     if value == False:

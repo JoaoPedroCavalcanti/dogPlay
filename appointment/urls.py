@@ -26,8 +26,8 @@ urlpatterns = [
     ),
     
      path('api/v1/<int:id>/',
-          views.api.appointments_api_detail, 
-          name='appointments_detail_api_v1'
+          views.api.appointment_api_detail, 
+          name='appointment_detail_api_v1'
     ),
      
       path('api/v1/user/<int:id>/', 

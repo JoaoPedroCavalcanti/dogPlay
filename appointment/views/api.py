@@ -16,18 +16,45 @@ def appointments_api_list(request):
     
     elif request.method == 'POST':
         data = request.data
-        serialized_data = AppointmentSerializer(data=data)
+        serialized_data = AppointmentSerializer(
+            data=data,
+            context={'request': request}
+        )
 
         serialized_data.is_valid(raise_exception=True)
+        print(serialized_data)
         serialized_data.save()
         
         return Response(serialized_data.data, status=status.HTTP_201_CREATED)
 
-@api_view()
-def appointments_api_detail(request, id):
+@api_view(http_method_names=['get', 'patch', 'delete'])
+def appointment_api_detail(request, id):
     appointment = get_object_or_404(Appointment, id=id)
-    serializer = AppointmentSerializer(instance=appointment, many=False, context={'request': request})
-    return Response(serializer.data)
+    
+    if request.method == 'GET':
+        serializer = AppointmentSerializer(
+            instance=appointment, 
+            many=False, 
+            context={'request': request}
+        )
+        return Response(serializer.data)
+    
+    elif request.method == 'PATCH':
+        serializer = AppointmentSerializer(
+            instance=appointment,
+            data = request.data,
+            many=False,
+            partial = True,
+            context={'request': request}
+        )
+        serializer.is_valid()
+        serializer.save()
+        return Response(serializer.data)
+    
+    elif request.method == 'DELETE':
+        appointment.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+        
 
 @api_view()
 def user_api_detail(request, id):
