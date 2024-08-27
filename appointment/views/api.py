@@ -5,74 +5,18 @@ from appointment.serializer import AppointmentSerializer, UserSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from django.contrib.auth.models import User
-from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.viewsets import ModelViewSet
 
 class AppointmentAPIV1Pagination(PageNumberPagination):
     page_size = 10
-
-class AppointmentAPIV1List(ListCreateAPIView):
-    queryset = Appointment.objects.all()
-    serializer_class = AppointmentSerializer
-    pagination_class = AppointmentAPIV1Pagination
-    # lookup_field = 'id'
-
-
     
-class AppointmentAPIV1Detail(RetrieveUpdateDestroyAPIView):
+class AppointmentAPIV1ViewSet(ModelViewSet):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
     pagination_class = AppointmentAPIV1Pagination
 
-@api_view(http_method_names=['get', 'post'])
-def appointments_api_list(request):
-    if request.method == 'GET':
-        appointments = Appointment.objects.all()
-        serializer = AppointmentSerializer(instance=appointments, many=True, context={'request': request})
-        return Response(serializer.data)
-    
-    elif request.method == 'POST':
-        data = request.data
-        serialized_data = AppointmentSerializer(
-            data=data,
-            context={'request': request}
-        )
-
-        serialized_data.is_valid(raise_exception=True)
-        print(serialized_data)
-        serialized_data.save()
-        
-        return Response(serialized_data.data, status=status.HTTP_201_CREATED)
-
-@api_view(http_method_names=['get', 'patch', 'delete'])
-def appointment_api_detail(request, id):
-    appointment = get_object_or_404(Appointment, id=id)
-    
-    if request.method == 'GET':
-        serializer = AppointmentSerializer(
-            instance=appointment, 
-            many=False, 
-            context={'request': request}
-        )
-        return Response(serializer.data)
-    
-    elif request.method == 'PATCH':
-        serializer = AppointmentSerializer(
-            instance=appointment,
-            data = request.data,
-            many=False,
-            partial = True,
-            context={'request': request}
-        )
-        serializer.is_valid()
-        serializer.save()
-        return Response(serializer.data)
-    
-    elif request.method == 'DELETE':
-        appointment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-        
 
 @api_view()
 def user_api_detail(request, id):
