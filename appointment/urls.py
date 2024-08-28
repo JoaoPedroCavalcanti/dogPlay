@@ -12,7 +12,7 @@ appointment_api_v1_router.register(
       viewset= views.AppointmentAPIV1ViewSet,
       # basename='appointment-api',
 )
-# print(f'router: {appointment_api_v1_router.urls}')
+print(f'router: {appointment_api_v1_router.urls}')
 
 urlpatterns = [
     path('', 
