@@ -1,6 +1,11 @@
 from django.urls import path, include
 from appointment import views
 from rest_framework.routers import SimpleRouter
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+    TokenVerifyView
+)
 
 app_name = 'appointment'
 
@@ -10,47 +15,46 @@ appointment_api_v1_router = SimpleRouter()
 appointment_api_v1_router.register(
       prefix= 'api/v1',
       viewset= views.AppointmentAPIV1ViewSet,
-      # basename='appointment-api',
+      basename='appointment-api',
 )
 print(f'router: {appointment_api_v1_router.urls}')
 
 urlpatterns = [
-    path('', 
+      path('', 
           views.site.appointmentHome, 
           name='home'
-    ), #The name will be appointment:home
+      ),
     
-    path('<int:id>/', 
+      path('<int:id>/', 
           views.site.appointmentConfirmation, 
           name='confirmation'
-    ),#The name will be appointment:confirmation
+      ),
     
-    path('my-appointments/', 
+      path('my-appointments/', 
           views.site.my_appointments, 
           name='myAppointments'
-    ),
+      ),
     
-#     path('api/v1/', 
-#          views.api.AppointmentAPIV1ViewSet.as_view({
-#                'get': 'list',
-#                'post': 'create'
-#             }),
-#           name='appointments_list_api_v1'
-#     ),
-    
-#      path('api/v1/<int:pk>/',
-#           views.api.AppointmentAPIV1ViewSet.as_view({
-#                 'get': 'retrieve',
-#                 'patch': 'partial_update',
-#                 'delete': 'destroy'
-#             }), 
-#           name='appointment_detail_api_v1'
-#     ),
-     
       path('api/v1/user/<int:id>/', 
           views.api.user_api_detail, 
           name='user_detail_api_v1'
-    ),
+      ),
+      
+      # JWT
+      path('appointment/api/token/', 
+           TokenObtainPairView.as_view(), 
+           name='token_obtain_pair'
+      ),
+      path('appointment/api/token/refresh/', 
+           TokenRefreshView.as_view(), 
+           name='token_refresh'
+      ),
+      path('appointment/api/token/verify/', 
+           TokenVerifyView.as_view(), 
+           name='token_verify'
+      ),
+      
+      # Router
       path('', include(appointment_api_v1_router.urls)),
 
 ]
