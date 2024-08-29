@@ -17,23 +17,6 @@ class AppointmentAPIV1ViewSet(ModelViewSet):
     serializer_class = AppointmentSerializer
     pagination_class = AppointmentAPIV1Pagination
 
-    # def get_queryset(self):
-    #     qs = super().get_queryset()
-        
-    #     if self.kwargs:
-    #         qs = qs.filter(pk=self.kwargs.get('pk'))
-
-    #     else:
-    #         is_confirmed = int(self.request.query_params.get('is_confirmed', None))
-    #         if is_confirmed == 1:
-    #             is_confirmed = True
-    #         else:
-    #             is_confirmed = False
-            
-    #         qs = qs.filter(is_confirmed=is_confirmed)
-                
-    #     return qs
-
 @api_view()
 def user_api_detail(request, id):
     user = get_object_or_404(User, id=id)

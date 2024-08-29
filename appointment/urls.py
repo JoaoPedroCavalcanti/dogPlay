@@ -41,15 +41,15 @@ urlpatterns = [
       ),
       
       # JWT
-      path('appointment/api/token/', 
+      path('api/token/', 
            TokenObtainPairView.as_view(), 
            name='token_obtain_pair'
       ),
-      path('appointment/api/token/refresh/', 
+      path('api/token/refresh/', 
            TokenRefreshView.as_view(), 
            name='token_refresh'
       ),
-      path('appointment/api/token/verify/', 
+      path('api/token/verify/', 
            TokenVerifyView.as_view(), 
            name='token_verify'
       ),
