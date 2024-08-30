@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny, IsAdminUser
-from appointment.permissions import IsOwner
+from appointment.permissions import IsOwnerOrAdmin
 
 class AppointmentAPIV1Pagination(PageNumberPagination):
     page_size = 10
@@ -34,7 +34,7 @@ class AppointmentAPIV1ViewSet(ModelViewSet):
 
     def get_permissions(self):
         if self.request.method == 'PATCH':
-            return [IsOwner(),]
+            return [IsOwnerOrAdmin(),]
         
         if self.request.method in ['DELETE', 'POST']:
             return [IsAdminUser(), ]
