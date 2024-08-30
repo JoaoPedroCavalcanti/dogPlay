@@ -6,7 +6,8 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAdminUser
+from appointment.permissions import IsOwner
 
 class AppointmentAPIV1Pagination(PageNumberPagination):
     page_size = 10
@@ -15,7 +16,30 @@ class AppointmentAPIV1ViewSet(ModelViewSet):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
     pagination_class = AppointmentAPIV1Pagination
-    permission_classes = [IsAuthenticated, ]
+    permission_classes = [AllowAny,]
+
+    def get_serializer_context(self):
+        context = super(AppointmentAPIV1ViewSet, self).get_serializer_context()
+        context.update({"request": self.request})
+        return context
+
+    # def get_object(self):
+    #     pk = self.kwargs.get('pk', '')
+    #     obj = get_object_or_404(
+    #         self.get_queryset(),
+    #         pk = pk
+    #     )
+    #     self.check_object_permissions(request=self.request, obj = obj)
+    #     return obj
+
+    def get_permissions(self):
+        if self.request.method == 'PATCH':
+            return [IsOwner(),]
+        
+        if self.request.method in ['DELETE', 'POST']:
+            return [IsAdminUser(), ]
+        
+        return super().get_permissions()
 
 @api_view()
 def user_api_detail(request, id):

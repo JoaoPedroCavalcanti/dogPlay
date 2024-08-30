@@ -10,7 +10,21 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = ['id', 'time', 'date', 'petOwner', 'petOwner_link', 'is_confirmed']
-        # lookup_field = 'id'
+        # extra_kwargs = {
+        #     'id': {'read_only': True},
+        #     'time': {'read_only': True},
+        #     'date': {'read_only': True},
+        #     'is_confirmed': {'read_only': True},
+        # }
+        
+    def __init__(self, *args, **kwargs):
+        super(AppointmentSerializer, self).__init__(*args, **kwargs)
+        user = self.context['request'].user
+        if not user.is_staff:
+            self.fields['petOwner'].read_only = False  # Permite que o usuário altere o campo 'time'
+            for field in self.fields:
+                if field != 'petOwner':
+                    self.fields[field].read_only = True  # Torna os outros campos read-only
         
         
     
@@ -38,3 +52,11 @@ class AppointmentSerializer(serializers.ModelSerializer):
     #     if value == False:
     #         raise serializers.ValidationError("is_confirmed should be True")
     #     return value
+
+    def validate_petOwner(self, value):
+        request = self.context['request']
+        if not request.user.is_staff:
+            # Se não for admin, só pode definir o petOwner como ele mesmo ou None
+            if value and value != request.user:
+                raise serializers.ValidationError("You can only define this fiels as None or yours.")
+        return value
