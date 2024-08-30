@@ -17,6 +17,7 @@ class AppointmentAPIV1ViewSet(ModelViewSet):
     serializer_class = AppointmentSerializer
     pagination_class = AppointmentAPIV1Pagination
     permission_classes = [AllowAny,]
+    http_method_names = ['get', 'patch', 'post', 'delete']
 
     def get_serializer_context(self):
         context = super(AppointmentAPIV1ViewSet, self).get_serializer_context()
