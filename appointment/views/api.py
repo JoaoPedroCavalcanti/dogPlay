@@ -42,6 +42,7 @@ class AppointmentAPIV1ViewSet(ModelViewSet):
         
         return super().get_permissions()
 
+
 @api_view()
 def user_api_detail(request, id):
     user = get_object_or_404(User, id=id)
