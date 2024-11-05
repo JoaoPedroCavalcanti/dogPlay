@@ -1,11 +1,12 @@
-from django.urls import path, include
-from appointment import views
+from django.urls import include, path
 from rest_framework.routers import SimpleRouter
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
-    TokenVerifyView
+    TokenVerifyView,
 )
+
+from appointment import views
 
 app_name = 'appointment'
 
